@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class SelenideTest {
@@ -19,7 +18,9 @@ public class SelenideTest {
     void selenidePageTest() {
         open("/selenide/selenide");
         $("#wiki-tab").click();
-        $$("a[class='internal present']").findBy(text("Soft assertions")).shouldBe(visible).click();
-        $$(".heading-element").findBy(text("JUnit5")).shouldBe(visible);
+        $$("button").findBy(text("Show 3 more pages")).click();
+        $$(".details-reset a").findBy(text("SoftAssertions")).scrollIntoView(true).click();
+        $$(".markdown-heading").findBy(text("JUnit5")).sibling(0).scrollIntoView(true)
+                .shouldHave(cssClass("highlight-source-java"));
     }
 }
